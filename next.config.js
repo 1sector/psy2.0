@@ -8,6 +8,15 @@ const nextConfig = {
   // Disable server components and API routes for static export
   experimental: {
     appDir: true,
+    serverComponentsExternalPackages: ['@payloadcms/db-mongodb'],
+  },
+  webpack: (config) => {
+    // Решаем проблему с terser-webpack-plugin
+    config.optimization = {
+      ...config.optimization,
+      minimize: false
+    }
+    return config
   },
   // Add redirects for API routes in static build
   async redirects() {
